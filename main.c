@@ -11,7 +11,6 @@ int per_person_score_list[5][4] = {{34000, 56000, 23000, 78000},
 
 float year_avg = 0.0f;
 
-void sale_score_per_quater();
 
 int bungi_sum(int index) {
     int sum_of_float = per_person_score_list[0][index] + per_person_score_list[1][index] + per_person_score_list[2][index] +
