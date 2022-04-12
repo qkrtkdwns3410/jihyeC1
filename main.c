@@ -2,38 +2,73 @@
 #include <string.h>
 #include <math.h>
 
-void sale_score_report(int per_person_score_list[5][4], char person_name[5][20]) {
-    printf("======================================================\n");
-    printf("        판매사원  1/4분기  2/4분기  3/4분기  4/4분기  총합        \n");
-    printf("======================================================\n");
+char person_name[5][20] = {"KIM", "LEE", "PARK", "SONG", "CHOI"};
+int per_person_score_list[5][4] = {{34000, 56000, 23000, 78000},
+                                   {23000, 65000, 18000, 94000},
+                                   {25000, 34000, 19000, 68000},
+                                   {18000, 52000, 23500, 73950},
+                                   {25000, 38000, 26000, 64000}};
+
+
+int bungi_sum(int index) {
+    int sum_of_float = per_person_score_list[0][index] + per_person_score_list[1][index] + per_person_score_list[2][index] +
+                       per_person_score_list[3][index] +
+                       per_person_score_list[4][index];
+    
+    
+    return sum_of_float;
+}
+
+
+void sale_score_report() {
+    int sum_of_arr = 0;
+    
+    printf("==============================================================\n");
+    printf(" 판매사원       1/4분기       2/4분기       3/4분기       4/4분기       총합        \n");
+    printf("==============================================================\n");
     for (int i = 0; i < 5; i++) {
         int sum_of = 0;
         for (int j = 0; j < 4; j++) {
             sum_of += per_person_score_list[i][j];
         }
-        printf("%s %ld %ld %d %d %d %d\n", &person_name[i], per_person_score_list[i][0], per_person_score_list[i][1], per_person_score_list[i][2],
+        sum_of_arr += sum_of;
+        printf("%s          %d         %d         %d          %d          %d\n", &person_name[i], per_person_score_list[i][0], per_person_score_list[i][1],
+               per_person_score_list[i][2],
                per_person_score_list[i][3], sum_of);
         
         
     }
+    printf("분기총합");
+    
+    for (int i = 0; i < 4; i++) {
+        printf("        %d", bungi_sum(i));
+    }
+    
+    printf("    %d", sum_of_arr);
+    printf("\n");
+    printf("==============================================================\n");
+    printf("분기평균");
+    for (int i = 0; i < 4; i++) {
+        printf("     %.2lf", (float) bungi_sum(i) / 5);
+    }
+    printf("    %.2lf\n", (float) sum_of_arr / 5);
+    printf("==============================================================\n");
+    
 }
+
 
 //판매 실적 보고서 생성 프로그램
 int main() {
-    char person_name[5][20] = {"KIM", "LEE", "PARK", "SONG", "CHOI"};
-    int per_person_score_list[5][4] = {{34000, 56000, 23000, 78000},
-                                       {23000, 65000, 18000, 94000},
-                                       {18000, 52000, 23500, 73950},
-                                       {25000, 34000, 19000, 68000},
-                                       {25000, 38000, 26000, 64000}};
-//    for (int i = 0; i < 5; i++) {
-//        printf("%s의 판매실적을 입력하세요 (1/4, 2/4, 3/4, 4/4)\n", &person_name[i]);
-//        for (int j = 0; j < 4; j++) {
-//            scanf_s("&d", &per_person_score_list[i][j]);
-//        }
-//
-//    }
-    sale_score_report(per_person_score_list, person_name);
+    
+    for (int i = 0; i < 5; i++) {
+        printf("%s의 판매실적을 입력하세요 (1/4, 2/4, 3/4, 4/4)\n", &person_name[i]);
+        scanf("%d%d%d%d", &per_person_score_list[i][0], &per_person_score_list[i][1], &per_person_score_list[i][2], &per_person_score_list[i][3]);
+        
+    }
+    // 판매 실적 보고서
+    sale_score_report();
+    
+    //분기별 판매 실적 그래프
     
     return 0;
 }
